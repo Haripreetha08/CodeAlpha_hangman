@@ -1,0 +1,33 @@
+import random
+word_list =["aesthetic", "passion","meme","music", "knowledge"] 
+secret_word=random.choice(word_list)
+
+wrong_guesses= 0
+guessed_letters=[]
+max_wrong=6
+def show_display():
+    display = []
+    for letter in secret_word:
+        if letter in guessed_letters:
+           display.append(letter)
+        else:
+           display.append("_")
+    print(" ".join(display))
+while wrong_guesses < max_wrong and not all(letter in guessed_letters for letter in secret_word):
+   show_display()
+   print(f"Wrong guesses left: {max_wrong - wrong_guesses}")
+   letter=input("Guess a letter:")
+   if letter in guessed_letters:
+        print("Error letter already guessed")
+   elif letter in secret_word:
+        guessed_letters.append(letter)
+        print("Letter guessed successfully")
+   else:
+        wrong_guesses+=1
+        print("Guessed letter is wrong")
+
+if all(letter in guessed_letters for letter in secret_word):
+    print ("Guessed correctly...player won !")
+else:
+    print ("Incorrect guess...player lose !") 
+    print("The secret word was:", secret_word)
